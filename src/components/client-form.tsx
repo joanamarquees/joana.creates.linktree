@@ -5,7 +5,6 @@ import {
 	FaArrowLeft,
 	FaArrowRight,
 	FaCheck,
-	FaCode,
 	FaLaptopCode,
 	FaPalette,
 	FaVideo,
@@ -264,26 +263,16 @@ export const ClientForm: React.FC<ClientFormProps> = ({ isOpen, onClose }) => {
 										onClick={() => handleServiceSelect("Web Design")}
 									/>
 									<ServiceCard
-										icon={FaCode}
-										label="Site from scratch"
+										icon={FaLaptopCode}
+										label="Web Development"
 										selected={formData.serviceType === "Site from scratch"}
 										onClick={() => handleServiceSelect("Site from scratch")}
 									/>
 									<ServiceCard
-										icon={FaLaptopCode}
-										label="Site for a existing design"
-										selected={
-											formData.serviceType === "Site for a existing design"
-										}
-										onClick={() =>
-											handleServiceSelect("Site for a existing design")
-										}
-									/>
-									<ServiceCard
 										icon={FaVideo}
-										label="Video Edition"
-										selected={formData.serviceType === "Video Edition"}
-										onClick={() => handleServiceSelect("Video Edition")}
+										label="Video Editing"
+										selected={formData.serviceType === "Video Editing"}
+										onClick={() => handleServiceSelect("Video Editing")}
 									/>
 								</div>
 							)}
