@@ -10,6 +10,7 @@ import {
 	FaVideo,
 } from "react-icons/fa6";
 import { cn } from "../utils/cn";
+import { RiLoader4Fill } from "react-icons/ri";
 
 interface ClientFormProps {
 	isOpen: boolean;
@@ -68,6 +69,10 @@ const FORM_STEPS = [
 export const ClientForm: React.FC<ClientFormProps> = ({ isOpen, onClose }) => {
 	const [isVisible, setIsVisible] = useState(false);
 	const [step, setStep] = useState(1);
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [submitStatus, setSubmitStatus] = useState<
+		"idle" | "success" | "error"
+	>("idle");
 
 	//form data
 	const [formData, setFormData] = useState({
@@ -84,6 +89,57 @@ export const ClientForm: React.FC<ClientFormProps> = ({ isOpen, onClose }) => {
 		budget: "",
 		consent: false,
 	});
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		if (!formData.consent || isSubmitting) return;
+
+		setIsSubmitting(true);
+		setSubmitStatus("idle");
+
+		try {
+			// Replace with your Google Apps Script web app URL
+			const scriptURL =
+				"https://script.google.com/macros/s/AKfycbwYPyjAXZIdebot_7PZH6EYegLbcN37yzhidSGw_zFYX3jdwGFOhu3xdz8f3C8z4016/exec";
+
+			await fetch(scriptURL, {
+				method: "POST",
+				mode: "no-cors", // Important for Google Apps Script
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			});
+
+			// With no-cors, we can't read the response, so we assume success
+			setSubmitStatus("success");
+			setTimeout(() => {
+				//onClose();
+				// Reset form
+				setFormData({
+					firstName: "",
+					lastName: "",
+					email: "",
+					serviceType: "",
+					brandName: "",
+					brandDescription: "",
+					visualInspiration: "",
+					toneStyle: "",
+					pinterestUrl: "",
+					deadline: "",
+					budget: "",
+					consent: false,
+				});
+				setSubmitStatus("idle");
+			}, 2000);
+		} catch (error) {
+			console.error("Error submitting form:", error);
+			setSubmitStatus("error");
+		} finally {
+			setIsSubmitting(false);
+			//onClose();
+		}
+	};
 
 	//handle visibility for animations
 	useEffect(() => {
@@ -126,13 +182,6 @@ export const ClientForm: React.FC<ClientFormProps> = ({ isOpen, onClose }) => {
 
 	const handlePrev = () => {
 		if (step > 1) setStep(step - 1);
-	};
-
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		if (!formData.consent) return;
-		console.log("Form Submitted", formData);
-		onClose();
 	};
 
 	const handleChange = (
@@ -449,11 +498,20 @@ export const ClientForm: React.FC<ClientFormProps> = ({ isOpen, onClose }) => {
 								formData.consent
 									? "bg-deepText text-white hover:scale-105 active:scale-95 cursor-pointer"
 									: "bg-deepText/20 text-deepText/40 cursor-not-allowed",
+								isSubmitting && "bg-linear-to-r from-pastelMint to-pastelBlue",
 							)}
 						>
-							<div className="absolute inset-0 bg-linear-to-r from-pastelMint to-pastelBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+							{/* <div className="absolute inset-0 bg-linear-to-r from-pastelMint to-pastelBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300" /> */}
 							<span className="relative z-10 flex items-center gap-2 font-bold tracking-widest uppercase text-[12px]">
-								Send Request <FaCheck />
+								Send Request
+								{isSubmitting ? (
+									<RiLoader4Fill
+										className="ml-2 animate-spin text-white"
+										size={20}
+									/>
+								) : (
+									<FaCheck />
+								)}
 							</span>
 						</button>
 					)}
