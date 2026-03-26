@@ -2,7 +2,7 @@
 
 A fully custom-built Linktree alternative, designed from scratch to have complete control over the UI. Built with React + TypeScript and deployed on Vercel, this replaces generic link-in-bio tools with something entirely mine.
 
-**Live site:** [joana-creates-linktree.vercel.app](https://joana-creates-linktree.vercel.app)
+**Live site:** [joana.creates-linktree.tudu.dev](https://joana.creates-linktree.tudu.dev)
 
 ## ✨ What it does
 
