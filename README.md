@@ -1,16 +1,22 @@
-# React + Vite
+# Custom Linktree
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully custom-built Linktree alternative, designed from scratch to have complete control over the UI. Built with React + TypeScript and deployed on Vercel, this replaces generic link-in-bio tools with something entirely mine.
 
-Currently, two official plugins are available:
+**Live site:** [joana-creates-linktree.vercel.app](https://joana-creates-linktree.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ What it does
 
-## React Compiler
+The page hosts two main interactions:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**→ Portfolio link** — directs visitors to my personal portfolio.
 
-## Expanding the ESLint configuration
+**→ Contact form** — a fully custom-built form (not a third-party embed) that:
+- Validates and submits visitor messages directly from the page
+- Triggers an automated HTML-styled email to my inbox with all submitted information
+- Logs every submission automatically to a connected Google Sheets file, via Google Apps Script
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+No external form services. No paid tools. Built and wired up entirely by hand.
+
+## 💡 Why I built this
+
+I wanted a link-in-bio page that looked exactly the way I envisioned, not constrained by a third-party template. Building it myself also meant I could add a real contact form with automated data collection, something no free Linktree tier offers.
